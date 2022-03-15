@@ -2,10 +2,6 @@ from .base_page import BasePage
 from .locators import ProductPageLocators
 import time
 
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-
 class ProductPage(BasePage): 
     def add_to_cart(self):
         button_to_add = self.browser.find_element(*ProductPageLocators.BUTTON_TO_ADD)
@@ -13,12 +9,19 @@ class ProductPage(BasePage):
                            
     def should_be_product_page(self):
        # self.should_be_product_url()
-        self.should_be_button_to_add_to_cart()   
+        self.should_be_button_to_add_to_cart()
+        self.should_not_be_success_message()        
     
     def should_be_message(self):
         self.should_be_item_added_to_cart()
         self.should_be_price_to_cart()
+        
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.NAME_ITEM_IN_THE_CART), "Success message is presented, but should not be"    
 
+    def should_not_be_success_message_is_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.NAME_ITEM_IN_THE_CART), "Success message is not disappeared, but should be"
+    
     #def should_be_product_url(self):
         # реализуйте проверку на корректный url адрес
         #assert "?promo=newYear" in self.browser.current_url, 'Страница по данному url-адресу не найдена'
