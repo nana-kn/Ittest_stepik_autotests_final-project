@@ -7,10 +7,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage():
-    def __init__(self, browser, url, timeout=10):
+    def __init__(self, browser, url, timeout=7):
         self.browser = browser
-        self.url = url
-        
+        self.url = url    
         self.browser.implicitly_wait(timeout)
 
     def go_to_login_page(self):
@@ -57,7 +56,6 @@ class BasePage():
         alert.send_keys(answer)
         alert.accept()
         try:
-            #WebDriverWait(self.browser, 30).until(EC.alert_is_present())
             alert = self.browser.switch_to.alert
             alert_text = alert.text
             print(f"Your code: {alert_text}")
