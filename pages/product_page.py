@@ -41,6 +41,5 @@ class ProductPage(BasePage):
         price_item = self.browser.find_element(*ProductPageLocators.PRICE_ITEM).text
         message_price_item = self.browser.find_element(*ProductPageLocators.PRICE_ITEM_IN_THE_CART).text
         assert price_item == message_price_item, 'Цена товара не совпадает!'        
-        
-    
+
 
